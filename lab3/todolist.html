@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            background-color: #ffd1ed;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: rgb(161, 204, 205);)
+        }
+
+        #taskInput {
+            padding: 5px;
+            color: rgb(161, 204, 205);)
+        }
+
+        button {
+            padding: 5px;
+            cursor: pointer;
+            color: rgb(161, 204, 205);)
+        }
+
+        .task {
+            margin: 5px;
+            color: rgb(161, 204, 205);)
+        }
+    </style>
+</head>
+<body>
+
+<h2>To-Do List</h2>
+<input type="text" id="taskInput" placeholder="New task">
+<button onclick="addTask()">Add</button>
+<div id="taskList"></div>
+
+<script>
+    function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskName = taskInput.value.trim();
+
+        if (taskName === "") {
+            alert("Enter a task!");
+            return;
+        }
+
+        let task = document.createElement("div");
+        task.classList.add("task");
+
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.onchange = function() {
+            taskText.classList.toggle("done", checkbox.checked);
+        };
+
+        let taskText = document.createElement("span");
+        taskText.textContent = taskName;
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "X";
+        deleteBtn.onclick = function() {
+            task.remove();
+        };
+
+        task.appendChild(checkbox);
+        task.appendChild(taskText);
+        task.appendChild(deleteBtn);
+
+        document.getElementById("taskList").appendChild(task);
+        taskInput.value = "";
+    }
+</script>
+
+</body>
+</html>
